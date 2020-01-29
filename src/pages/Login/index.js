@@ -8,7 +8,7 @@ import {View,
   StatusBar,} from 'react-native'
   import { useTheme } from '@react-navigation/native'
 
-export default function Login({navigation}){
+export default function Login({navigation,scheme}){
   const { colors, input } = useTheme();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -17,7 +17,7 @@ export default function Login({navigation}){
   
 
   function navigateToAttendances(){
-    navigation.navigate('AppRoutes')
+    navigation.navigate('AppRoutes',{scheme})
   }
   return(
     <View  style={styles.container}>

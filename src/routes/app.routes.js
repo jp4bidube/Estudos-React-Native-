@@ -13,7 +13,7 @@ import VendasRoutes from './vendas.routes'
 import DrawerVendas from './drawer.routes'
 import Camera from '../pages/Camera/index'
 
-export default function AppRoutes() {
+export default function AppRoutes({scheme}) {
 
   function IconWithBadge({ name, badgeCount, color, size }) {
     return (
@@ -67,7 +67,7 @@ export default function AppRoutes() {
           }
         },
       })}>
-        <Tab.Screen name="Atendimentos" component={AttendancesRoutes} />
+        <Tab.Screen name="Atendimentos" scheme={scheme} component={AttendancesRoutes} />
         <Tab.Screen name="Vendas" component={DrawerVendas} />
         <Tab.Screen name="Camera" component={Camera} />
       </Tab.Navigator>

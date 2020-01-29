@@ -3,6 +3,7 @@ import { NavigationNativeContainer, DefaultTheme } from '@react-navigation/nativ
 import 'react-native-gesture-handler';
 import { StatusBar } from 'react-native'
 import Routes from './routes/login.routes'
+import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 
 
 const LightTheme = {
@@ -93,12 +94,14 @@ const DarkTheme = {
 };
 
 export default function App() {
-
-
+  let scheme = useColorScheme();
+  scheme = 'dark'
   return (
-      <NavigationNativeContainer theme={DarkTheme}>
-        <Routes/>
+    <AppearanceProvider>
+      <NavigationNativeContainer theme={scheme === 'dark' ? DarkTheme : LightTheme}>
+        <Routes scheme={scheme}/>
       </NavigationNativeContainer>
+    </AppearanceProvider>
   );
 }
 
