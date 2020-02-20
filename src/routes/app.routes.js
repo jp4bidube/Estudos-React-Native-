@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text,View} from 'react-native'
+import { Text, View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -13,7 +13,7 @@ import VendasRoutes from './vendas.routes'
 import DrawerVendas from './drawer.routes'
 import Camera from '../pages/Camera/index'
 
-export default function AppRoutes({scheme}) {
+export default function AppRoutes({ scheme }) {
 
   function IconWithBadge({ name, badgeCount, color, size }) {
     return (
@@ -42,34 +42,34 @@ export default function AppRoutes({scheme}) {
       </View>
     );
   }
-  
+
   function HomeIconWithBadge(props) {
     // You should pass down the badgeCount in some other ways like React Context API, Redux, MobX or event emitters.
     return <IconWithBadge {...props} badgeCount={5} />;
   }
 
   return (
-      <Tab.Navigator screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          if (route.name === 'Vendas') {
-            return (
-              <HomeIconWithBadge
-                name={'logo-usd'}
-                size={size}
-                color={color}
-              />
-            );
-          } else if (route.name === 'Atendimentos') {
-            return <Icon name="ios-laptop" size={size} color={color} />;
-          } 
-          else if (route.name === 'Camera') {
-            return <Icon name="ios-camera" size={size} color={color} />;
-          }
-        },
-      })}>
-        <Tab.Screen name="Atendimentos" scheme={scheme} component={AttendancesRoutes} />
-        <Tab.Screen name="Vendas" component={DrawerVendas} />
-        <Tab.Screen name="Camera" component={Camera} />
-      </Tab.Navigator>
+    <Tab.Navigator screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        if (route.name === 'Vendas') {
+          return (
+            <HomeIconWithBadge
+              name={'logo-usd'}
+              size={size}
+              color={color}
+            />
+          );
+        } else if (route.name === 'Atendimentos') {
+          return <Icon name="ios-laptop" size={size} color={color} />;
+        }
+        else if (route.name === 'Camera') {
+          return <Icon name="ios-camera" size={size} color={color} />;
+        }
+      },
+    })}>
+      <Tab.Screen name="Atendimentos" component={AttendancesRoutes} />
+      <Tab.Screen name="Vendas" component={DrawerVendas} />
+      <Tab.Screen name="Camera" component={Camera} />
+    </Tab.Navigator>
   );
 }

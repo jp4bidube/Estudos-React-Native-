@@ -1,29 +1,37 @@
-import React, {useState, useEffect} from 'react'
-import {View,
+import React, { useState, useContext, useEffect } from 'react'
+import { ThemeContext } from '../../components/ThemeContext'
+import {
+  View,
   StyleSheet,
   Image,
   Text,
   TextInput,
   TouchableOpacity,
-  StatusBar,} from 'react-native'
-  import { useTheme } from '@react-navigation/native'
+  StatusBar,
+} from 'react-native'
+import {
+  TouchableRipple,
+  Switch,
+} from 'react-native-paper';
+import { useTheme, Theme } from '@react-navigation/native'
 
-export default function Login({navigation,scheme}){
+export default function Login({ navigation, route }, props) {
   const { colors, input } = useTheme();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  
-  
+  const [theme, setTheme] = useState(false)
 
-  function navigateToAttendances(){
-    navigation.navigate('AppRoutes',{scheme})
+
+  function navigateToAttendances() {
+    navigation.navigate('AppRoutes')
   }
-  return(
-    <View  style={styles.container}>
-     <StatusBar backgroundColor={colors.background} barStyle="dark-content"></StatusBar>
-    <Image source={require('../../assets/source.gif')} style={styles.splash}/>
-    <TextInput
+
+  return (
+    <View {...props} style={styles.container}>
+      <StatusBar backgroundColor={colors.background} barStyle="dark-content"></StatusBar>
+      <Image source={require('../../assets/source.gif')} style={styles.splash} />
+      <TextInput
         autoCapitalize="none"
         autoCorrect={false}
         style={input}
@@ -46,7 +54,24 @@ export default function Login({navigation,scheme}){
       <TouchableOpacity style={styles.button} onPress={navigateToAttendances}>
         <Text style={styles.buttonText}>Enviar</Text>
       </TouchableOpacity>
-    </View>
+
+      <TouchableRipple onPress={() => {
+        if (theme == true) {
+          setTheme(false)
+          route.params.teste(false)
+        } else {
+          setTheme(true)
+          route.params.teste(true)
+        }
+      }}>
+        <View style={styles.preference}>
+          <Text>{route.params.teste}</Text>
+          <View pointerEvents="none">
+            <Switch value={theme} />
+          </View>
+        </View>
+      </TouchableRipple>
+    </View >
   )
 }
 
@@ -98,11 +123,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
   },
-  splash:{
-    height:320,
-    width:320,
-    justifyContent:'center',
-    alignItems:'center'
+  splash: {
+    height: 320,
+    width: 320,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 

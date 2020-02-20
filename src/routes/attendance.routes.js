@@ -8,21 +8,20 @@ const Stack = createStackNavigator()
 import Attendances from '../pages/Attendances/index'
 import AttendanceDetails from '../pages/Attendances/attendanceDetails'
 
-export default function AttendancesRoutes({scheme}){
+export default function AttendancesRoutes({ navigation }) {
   let colorScheme = useColorScheme();
   const { colors } = useTheme();
-  function SwitchTheme(){
-    console.log(scheme)
-    return(
-       <Icon onPress={()=>{scheme = 'dark'}} style={{marginLeft:20}} name="ios-settings" size={30} color={colors.primary} />
+  function Logout() {
+    return (
+      <Icon onPress={() => { navigation.navigate('Login') }} style={{ marginRight: 20 }} name="ios-log-out" size={30} color={colors.primary} />
     )
   }
 
-  
-  return(
-    <Stack.Navigator screenOptions={{headerStyle: {backgroundColor: colors.card},headerTintColor:colors.primary}}>
-       <Stack.Screen name='Attendances' component={Attendances} options={{headerTitle: 'Atendimentos',headerTitleAlign:'center',headerLeft:SwitchTheme}}/>
-      <Stack.Screen name='AttendanceDetails' component={AttendanceDetails} options={{headerTitle: 'Detalhes',headerTitleAlign:'center'}}/>
+
+  return (
+    <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: colors.card }, headerTintColor: colors.primary }}>
+      <Stack.Screen name='Attendances' component={Attendances} options={{ headerTitle: 'Atendimentos', headerTitleAlign: 'center', headerRight: Logout }} />
+      <Stack.Screen name='AttendanceDetails' component={AttendanceDetails} options={{ headerTitle: 'Detalhes', headerTitleAlign: 'center' }} />
     </Stack.Navigator>
   )
 }
