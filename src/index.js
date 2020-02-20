@@ -1,9 +1,7 @@
-import React, { useContext, useState } from 'react';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
+import React, {useContext, useState} from 'react';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import 'react-native-gesture-handler';
-import { Provider as PaperProvider } from 'react-native-paper';
-import { ThemeProvider } from './components/ThemeContext'
-import Routes from './routes/login.routes'
+import Routes from './routes/login.routes';
 
 const LightTheme = {
   ...DefaultTheme,
@@ -17,11 +15,11 @@ const LightTheme = {
     border: 'rgb(199, 199, 204)',
   },
   cardItem: {
-    backgroundColor: "#FFF",
+    backgroundColor: '#FFF',
     borderWidth: 1,
     borderColor: '#DDD',
     borderRadius: 5,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -55,14 +53,14 @@ const DarkTheme = {
     card: '#3E4551',
     text: '#FFF',
     border: '#3E4551',
-    placeHolder: '#f5f5f5'
+    placeHolder: '#f5f5f5',
   },
   cardItem: {
-    backgroundColor: "#4B515F",
+    backgroundColor: '#4B515F',
     borderWidth: 1,
-    borderColor: "#3E4551",
+    borderColor: '#3E4551',
     borderRadius: 5,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -71,10 +69,10 @@ const DarkTheme = {
     shadowRadius: 10,
     elevation: 6,
     padding: 30,
-    marginBottom: 20
+    marginBottom: 20,
   },
   input: {
-    color: "#f5f5f5",
+    color: '#f5f5f5',
     height: 46,
     alignSelf: 'stretch',
     backgroundColor: '#3E4551',
@@ -83,7 +81,7 @@ const DarkTheme = {
     borderColor: '#3E4551',
     marginTop: 20,
     paddingHorizontal: 15,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -99,21 +97,14 @@ export default function App() {
 
   const theme = isDarkTheme ? DarkTheme : LightTheme; // Use Light/Dark theme based on a state
 
-  toggleTheme = (childData) => {
+  toggleTheme = childData => {
     // We will pass this function to Drawer and invoke it on theme switch press
     setIsDarkTheme(childData);
-  }
+  };
 
   return (
-    <ThemeProvider toggle={toggleTheme} theme={theme}>
-      <PaperProvider theme={theme}>
-        <NavigationContainer theme={theme}>
-          <Routes toggle={toggleTheme} />
-        </NavigationContainer>
-      </PaperProvider>
-    </ThemeProvider>
+    <NavigationContainer theme={theme}>
+      <Routes toggle={toggleTheme} />
+    </NavigationContainer>
   );
-
 }
-
-

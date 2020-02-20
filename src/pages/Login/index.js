@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react'
-import { ThemeContext } from '../../components/ThemeContext'
+import React, {useState, useContext, useEffect} from 'react';
+import {ThemeContext} from '../../components/ThemeContext';
 import {
   View,
   StyleSheet,
@@ -8,29 +8,31 @@ import {
   TextInput,
   TouchableOpacity,
   StatusBar,
-} from 'react-native'
-import {
-  TouchableRipple,
+  TouchableWithoutFeedback,
   Switch,
-} from 'react-native-paper';
-import { useTheme, Theme } from '@react-navigation/native'
+} from 'react-native';
+import {useTheme} from '@react-navigation/native';
 
-export default function Login({ navigation, route }, props) {
-  const { colors, input } = useTheme();
+export default function Login({navigation, route}, props) {
+  const {colors, input} = useTheme();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const [theme, setTheme] = useState(false)
-
+  const [theme, setTheme] = useState(false);
 
   function navigateToAttendances() {
-    navigation.navigate('AppRoutes')
+    navigation.navigate('AppRoutes');
   }
 
   return (
     <View {...props} style={styles.container}>
-      <StatusBar backgroundColor={colors.background} barStyle="dark-content"></StatusBar>
-      <Image source={require('../../assets/source.gif')} style={styles.splash} />
+      <StatusBar
+        backgroundColor={colors.background}
+        barStyle="dark-content"></StatusBar>
+      <Image
+        source={require('../../assets/source.gif')}
+        style={styles.splash}
+      />
       <TextInput
         autoCapitalize="none"
         autoCorrect={false}
@@ -55,24 +57,32 @@ export default function Login({ navigation, route }, props) {
         <Text style={styles.buttonText}>Enviar</Text>
       </TouchableOpacity>
 
-      <TouchableRipple onPress={() => {
-        if (theme == true) {
-          setTheme(false)
-          route.params.teste(false)
-        } else {
-          setTheme(true)
-          route.params.teste(true)
-        }
-      }}>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          if (theme == true) {
+            setTheme(false);
+            route.params.teste(false);
+          } else {
+            setTheme(true);
+            route.params.teste(true);
+          }
+        }}>
         <View style={styles.preference}>
-          <Text>{route.params.teste}</Text>
+          <Text></Text>
           <View pointerEvents="none">
-            <Switch value={theme} />
+            <Switch
+              trackColor={{
+                true: colors.primary,
+                false: '#DDD',
+              }}
+              thumbColor={'#fbfbfb'}
+              value={theme}
+            />
           </View>
         </View>
-      </TouchableRipple>
-    </View >
-  )
+      </TouchableWithoutFeedback>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -127,7 +137,6 @@ const styles = StyleSheet.create({
     height: 320,
     width: 320,
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
-
